@@ -22,12 +22,14 @@ The team from University of Patras participating in the 2018 IEEE AP-S Student D
    - Quality of the experimental model and results.
 Existing licensed software at the university (e.g., electromagnetic simulation software) or free software may be used. Any other commercial software used for the project should be included in the budget. The total production cost for the entire system must be less than US$1,500.
 
+
+
 ## Setup Instructions
+
 
 ### Setting up the Single Board Computer 
 
 [Source link](https://wiki.up-community.org/Ubuntu)
-
 #### Operating System Installation
 
 Download Ubuntu 16.04 ISO from the Ubuntu download page (works with desktop and server edition)
@@ -77,7 +79,6 @@ the result should look something like this:
 ```
 Linux 4.10.0-42-generic #5000~upboard9-Ubuntu SMP Tue Dec 12 11:46:16 UTC 2017
 ```
-
 #### Enable the HAT functionality from userspace
 To be able to use the GPIO, PWM, SPI, I2C and UART functionality with any user, there is an ubuntu package responsible for the appropriate permissions settings.
 
@@ -113,9 +114,8 @@ To apply the permission changes after applying the previous commands, rebooting 
 ```
 sudo reboot
 ```
-
 #### GPIO Library
-[Soure link] (https://github.com/intel-iot-devkit/mraa/blob/master/docs/up.md)
+[Soure link](https://github.com/intel-iot-devkit/mraa/blob/master/docs/up.md)
 
 *Due to severe incompatibilities with the RPi.GPIO library available for all Raspberry Pi boards, the [MRAA](http://mraa.io) is a Linux Library for low speed I/O Communication, supporting generic io platforms, and ideal for solving the GPIO connectivity issues. The disadvantage of this method, as mentioned, is the low speed of which the I/O is operated at, which in our case, fortunately, does not hinder the functionality of our system.*
 
@@ -128,6 +128,7 @@ sudo apt-get update
 sudo apt-get install libmraa1 libmraa-dev libmraa-java python-mraa python3-mraa node-mraa mraa-tools
 ```
 **Running MRAA tools or applications on Ubuntu systems requires elevated permissions (e.g. run with sudo).**
+
 
 ### Install GNURadio and UHD
 [Source link](https://kb.ettus.com/Building_and_Installing_the_USRP_Open-Source_Toolchain_(UHD_and_GNU_Radio)_on_Linux)
@@ -155,7 +156,6 @@ On Ubuntu 16.04 systems, run:
 After installing the dependencies, you should reboot the system.
 
 If the installation of the dependencies completes without any errors, then you can proceed to build and install UHD and GNU Radio.
-
 #### Building and installing UHD from source code
 UHD is open-source, and is hosted on GitHub. You can browse the code online at the link below, which points to version 3.10.1.0, which is the the latest release at the time of this writing.
 
@@ -298,7 +298,6 @@ If "gnuradio-companion" does not start and complains about the PYTHONPATH enviro
 ```
    export PYTHONPATH=/usr/local/lib/python2.7/dist-packages
 ```   
-
 #### Configuring USB
 On Linux, udev handles USB plug and unplug events. The following commands install a udev rule so that non-root users may access the device. This step is only necessary for devices that use USB to connect to the host computer, such as the B200, B210, and B200mini. This setting should take effect immediately and does not require a reboot or logout/login. Be sure that no USRP device is connected via USB when running these commands.
 ```
@@ -307,7 +306,6 @@ On Linux, udev handles USB plug and unplug events. The following commands instal
    sudo udevadm control --reload-rules
    sudo udevadm trigger
 ```
-   ---------
 #### Connect the USRP
 The installation of UHD and GNU Radio should now be complete. At this point, connect the USRP to the host computer.
 
