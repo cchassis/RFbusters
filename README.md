@@ -1,7 +1,7 @@
 # RFbusters
 The team from University of Patras participating in the 2018 IEEE AP-S Student Design Contest: Radiolocation and Channel Sounding. 
 
-The purpose of this repository is to provide additional documentation regarding the setup and operation of the system that will be submitted before the design contest judges.
+*The purpose of this repository is to provide additional documentation regarding the setup and operation of the system that will be submitted before the design contest judges, and also aid any potential future developments of this kind of applications.*
 
 ## Specifications:
 - The channel sounder must be portable. Excluding an external computer (if needed), the dimensions of the system must not exceed 1m x 1m x 0.1m.
@@ -49,76 +49,77 @@ sudo reboot
 
 #### Install Ubuntu kernel for UP from PPA
 
-After the reboot you need to add our repository:
+After the reboot you need to add the corresponding repository.
 ```
 sudo add-apt-repository ppa:ubilinux/up
 ```
-Update the repository list
+Next, update the repository list.
 ```
 sudo apt update
 ```
-Remove all the generic installed kernel
+Next, remove the previously-installed generic kernel.
 ```
 sudo apt-get autoremove --purge 'linux-.*generic'
 ```
-Install our kernel:
+Next, install the appropriate kernel.
 ```
 sudo apt-get install linux-image-generic-hwe-16.04-upboard
 ```
-Reboot
+Finally, reboot.
 ```
 sudo reboot
 ```
-After the reboot you can verify that the kernel is indeed installed by typing
+After the reboot, verify that the kernel is successfuly installed by typing:
 ```
 $ uname -srv
 ```
+the result should look something like this:
+```
 Linux 4.10.0-42-generic #5000~upboard9-Ubuntu SMP Tue Dec 12 11:46:16 UTC 2017
-
---------------
+```
 
 #### Enable the HAT functionality from userspace
-To be able to use the GPIO, PWM, SPI, I2C and uart functionality with a normal user we created a ubuntu package that set the correct permission.
+To be able to use the GPIO, PWM, SPI, I2C and UART functionality with any user, there is an ubuntu package responsible for the appropriate permissions settings.
 
-NOTE: this could create security problem, do only if you know what are you doing
+**NOTE: This could possibly create a security vulnerability, advance at your own risk**
 
-After adding our PPA you can install it with:
+After adding the corresponding PPA, you can install it by typing:
 ```
 sudo apt install upboard-extras
 ```
-after that you need to add the user that need to access the HAT functionality to the corresponding groups:
+Next, you need to add the user that will be granted access to the HAT functionality, to the corresponding groups.
 
-for example this command permit to the current user to access to the gpio functionality
+This command grants the current user access to the General Purpose I/O (GPIO):
 ```
 sudo usermod -a -G gpio ${USER}
 ```
-leds
+This command grants the current user access to the Light Emmiting Diodes (LEDS):
 ```
 sudo usermod -a -G leds ${USER}
 ```
-spi
+This command grants the current user access to the Serial Peripheral Interface Bus (SPI):
 ```
 sudo usermod -a -G spi ${USER}
 ```
-i2c
+This command grants the current user access to the Inter-Integrated Circuit (I²C):
 ```
 sudo usermod -a -G i2c ${USER}
 ```
-uart
+This command grants the current user access to the Universal Asynchronous Receiver-Transmitter (UART):
 ```
 sudo usermod -a -G dialout ${USER}
 ```
-to apply the permission changes after issuing the previous command a reboot is needed
+To apply the permission changes after applying the previous commands, rebooting is required.
 ```
 sudo reboot
 ```
---------------------------------------------------------------------------------------------------------------------------
 
 #### GPIO Library
-```
-https://github.com/intel-iot-devkit/mraa/blob/master/docs/up.md
-```
-Installing on Ubuntu
+[Soure link] (https://github.com/intel-iot-devkit/mraa/blob/master/docs/up.md)
+
+*Due to severe incompatibilities with the RPi.GPIO library available for all Raspberry Pi boards, the [MRAA](http://mraa.io) is a Linux Library for low speed I/O Communication, supporting generic io platforms, and ideal for solving the GPIO connectivity issues. The disadvantage of this method, as mentioned, is the low speed of which the I/O is operated at, which in our case, fortunately, does not hinder the functionality of our system.*
+
+**Installing on Ubuntu**
 
 Here is a PPA for installing on Ubuntu Xenial or Bionic: https://launchpad.net/~mraa/+archive/ubuntu/mraa
 ```
@@ -126,14 +127,13 @@ sudo add-apt-repository ppa:mraa/mraa
 sudo apt-get update
 sudo apt-get install libmraa1 libmraa-dev libmraa-java python-mraa python3-mraa node-mraa mraa-tools
 ```
-Running MRAA tools or applications on Ubuntu systems requires elevated permissions (e.g. run with sudo).
+**Running MRAA tools or applications on Ubuntu systems requires elevated permissions (e.g. run with sudo).**
 
-
---------------------------------------------------------------------------------------------------------------------------
 ### Install GNURadio and UHD
-```
-https://kb.ettus.com/Building_and_Installing_the_USRP_Open-Source_Toolchain_(UHD_and_GNU_Radio)_on_Linux
-```
+[Source link](https://kb.ettus.com/Building_and_Installing_the_USRP_Open-Source_Toolchain_(UHD_and_GNU_Radio)_on_Linux)
+
+*There is an alternative option for a much hands-off experience using PyBobms, but unfortunately due to limitations of this method, the Universal Software Radio Platform cannot be recognized properly when connected.*
+
 #### Update and Install dependencies
 Before building UHD and GNU Radio, you need to make sure that all the dependencies are first installed.
 
