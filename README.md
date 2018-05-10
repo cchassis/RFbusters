@@ -315,3 +315,7 @@ If the interface is USB, then open a terminal window, and run "lsusb". You shoul
 
 Also try running "uhd_find_devices" and "uhd_usrp_probe".
 
+++ /usr/local/lib/uhd/utils/uhd_images_downloader.py (command)
+++ (GR-XXX)
+   https://github.com/balint256/gr-baz.git
+   
